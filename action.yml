@@ -13,7 +13,7 @@ inputs:
   token:
     description: 'Slack API token'
     required: true
-    default: ${{ secrets.SLACK_API_TOKEN }}
+    default: 'NO_TOKEN'
     
 outputs:
   success:
@@ -23,8 +23,12 @@ outputs:
 runs:
   # COMPOSITE ACTION (bash)
   using: "composite"
+  env:
+    TOKEN: ${{ inputs.token }}
+    DEFAULT_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
   steps: 
     - id: install
+      shell: bash
       run: sudo apt-get install -y jq 
       
     - id: notify
@@ -32,9 +36,12 @@ runs:
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
         
+        if [ $TOKEN == 'NO_TOKEN' ]; then
+          TOKEN=$DEFAULT_TOKEN
+        fi
         RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
         --header 'Content-Type: application/json' \
-        --header 'Authorization: Bearer ${{ inputs.token }}' \
+        --header 'Authorization: Bearer $TOKEN' \
         --data-raw '{
             "text": ":github: ${{ inputs.text }}", 
             "channel": "${{ inputs.channel }}", 
