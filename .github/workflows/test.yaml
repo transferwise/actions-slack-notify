@@ -1,0 +1,24 @@
+name: "Test notify"
+
+on: 
+  workflow_dispatch:
+    inputs:
+      text:
+        required: true
+      channel:
+        required: true
+      token:
+        required: true
+
+jobs:
+  notify:
+    runs-on: [ubuntu-latest] # can't use self-hosted on action because it is public
+    name: Notify slack with user params
+    steps:
+      - name: Notify slack
+        id: notify
+        uses: transferwise/actions-slack-notify
+        with:
+          text: ${{ inputs.text }}
+          channel: ${{ inputs.channel }}
+          token: ${{ inputs.token }}
