@@ -23,9 +23,6 @@ outputs:
 runs:
   # COMPOSITE ACTION (bash)
   using: "composite"
-  env:
-    TOKEN: ${{ inputs.token }}
-    DEFAULT_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
   steps: 
     - id: install
       shell: bash
@@ -33,6 +30,9 @@ runs:
       
     - id: notify
       shell: bash
+      env:
+        TOKEN: ${{ inputs.token }}
+        DEFAULT_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
         
