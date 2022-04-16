@@ -6,11 +6,11 @@ on:
       text:
         type: string
         required: true
-        default: "test"
+        default: ":github: test"
       channel:
         type: string
         required: true
-        default: "@pavel.dvoinos"
+        default: "#channel"
       token:
         type: string
         required: true

@@ -14,7 +14,7 @@ inputs:
     description: 'Slack API token'
     required: true
     default: 'NO_TOKEN'
-    
+
 outputs:
   success:
     description: 'Whether request was successful'
@@ -38,14 +38,15 @@ runs:
         if [ $TOKEN == 'NO_TOKEN' ]; then
           TOKEN=$DEFAULT_TOKEN
         fi
-        RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
-        --header 'Content-Type: application/json' \
-        --header 'Authorization: Bearer $TOKEN' \
-        --data-raw '{
+        JSON='{
             "text": ":github: ${{ inputs.text }}", 
             "channel": "${{ inputs.channel }}", 
             "as_user": "True"
-        }' )
+        }'
+        RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
+        --header 'Content-Type: application/json' \
+        --header "Authorization: Bearer $TOKEN" \
+        --data-raw "${JSON}" )
         SUCCESS=$( echo $RESULT | jq -r '.ok' )
         
         echo "::set-output name=success::$(echo $SUCCESS)"

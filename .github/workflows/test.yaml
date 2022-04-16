@@ -4,10 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       text:
+        type: string
         required: true
+        default: ":github: test"
       channel:
+        type: string
         required: true
+        default: "#channel"
       token:
+        type: string
         required: true
 
 jobs:

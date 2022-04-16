@@ -41,7 +41,6 @@ jobs:
               "channel": "${{ inputs.channel }}", 
               "as_user": "True"
           }'
-          echo $JSON
           RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
           --header 'Content-Type: application/json' \
           --header "Authorization: Bearer $TOKEN" \
