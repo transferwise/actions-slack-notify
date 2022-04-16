@@ -24,6 +24,6 @@ jobs:
         id: notify
         uses: transferwise/actions-slack-notify@main
         with:
-          text:    ${{ inputs.text }}
-          channel: ${{ inputs.channel }}
-          token:   ${{ inputs.token }}
+          text:    ${{ github.event.inputs.text }}
+          channel: ${{ github.event.inputs.channel }}
+          token:   ${{ github.event.inputs.token }}
