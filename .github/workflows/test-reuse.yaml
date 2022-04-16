@@ -1,4 +1,4 @@
-name: "Test notify"
+name: "Test notify reusable"
 
 on: 
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Notify slack
         id: notify
-        uses: transferwise/actions-slack-notify@main
+        uses: transferwise/actions-slack-notify/run.yml@main
         with:
           text:    ${{ inputs.text }}
           channel: ${{ inputs.channel }}
