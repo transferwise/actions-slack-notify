@@ -20,7 +20,7 @@ jobs:
     name: Notify slack
     uses: transferwise/actions-slack-notify/.github/workflows/run.yml@main
     with:
-      text:    ${{ github.event.inputs.text }}"
+      text:    ${{ github.event.inputs.text }}
       channel: ${{ github.event.inputs.channel }}
     secrets:
       token:   ${{ github.event.inputs.token }}
