@@ -37,7 +37,7 @@ jobs:
             TOKEN=$DEFAULT_TOKEN
           fi
           JSON='{
-              "text": ":github: ${{ inputs.text }}", 
+              "text": ":github: ${{ inputs.text }} ", 
               "channel": "${{ inputs.channel }}", 
               "as_user": "True"
           }'
