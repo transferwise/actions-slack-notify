@@ -12,13 +12,9 @@ on:
 
 jobs:
   notify:
-    runs-on: [ubuntu-latest] # can't use self-hosted on action because it is public
-    name: Notify slack with user params
-    steps:
-      - name: Notify slack
-        id: notify
-        uses: transferwise/actions-slack-notify/run.yml@main
-        with:
-          text:    ${{ inputs.text }}
-          channel: ${{ inputs.channel }}
-          token:   ${{ inputs.token }}
+    name: Notify slack
+    uses: transferwise/actions-slack-notify/run.yml@main
+    with:
+      text:    ${{ inputs.text }}
+      channel: ${{ inputs.channel }}
+      token:   ${{ inputs.token }}
