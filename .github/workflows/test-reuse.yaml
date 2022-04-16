@@ -22,4 +22,5 @@ jobs:
     with:
       text:    ${{ github.event.inputs.text }}"
       channel: ${{ github.event.inputs.channel }}
+    secrets:
       token:   ${{ github.event.inputs.token }}
