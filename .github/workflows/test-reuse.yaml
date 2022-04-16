@@ -4,10 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       text:
+        type: string
         required: true
+        default: "test"
       channel:
+        type: string
         required: true
+        default: "@pavel.dvoinos"
       token:
+        type: string
         required: true
 
 jobs:
@@ -15,6 +20,6 @@ jobs:
     name: Notify slack
     uses: transferwise/actions-slack-notify/.github/workflows/run.yml@main
     with:
-      text:    ${{ inputs.text }}
-      channel: ${{ inputs.channel }}
-      token:   ${{ inputs.token }}
+      text:    "${{ inputs.text }}"
+      channel: "${{ inputs.channel }}"
+      token:   "${{ inputs.token }}"
