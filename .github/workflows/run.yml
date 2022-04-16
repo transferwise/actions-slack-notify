@@ -36,14 +36,15 @@ jobs:
           if [ $TOKEN == 'NO_TOKEN' ]; then
             TOKEN=$DEFAULT_TOKEN
           fi
+          JSON='{
+              "text": ":github: ${{ inputs.text }}", 
+              "channel": "${{ inputs.channel }}", 
+              "as_user": "True"
+          }'
           RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
           --header 'Content-Type: application/json' \
           --header "Authorization: Bearer $TOKEN" \
-          --data-raw "{
-              \"text\":    \":github: ${{ inputs.text }}\", 
-              \"channel\": \"${{ inputs.channel }}\", 
-              \"as_user\": \"True\"
-          }" )
+          --data-raw "${JSON}" )
           SUCCESS=$( echo $RESULT | jq -r '.ok' )
 
           echo "::set-output name=success::$(echo $SUCCESS)"
