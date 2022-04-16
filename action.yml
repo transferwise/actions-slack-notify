@@ -21,7 +21,6 @@ outputs:
     value: ${{ steps.notify.outputs.success }}
 
 runs:
-  # COMPOSITE ACTION (bash)
   using: "composite"
   steps: 
     - id: install
