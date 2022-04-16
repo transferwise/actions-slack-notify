@@ -31,13 +31,9 @@ runs:
       shell: bash
       env:
         TOKEN: ${{ inputs.token }}
-        DEFAULT_TOKEN: ${{ secrets.SLACK_API_TOKEN }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
-        
-        if [ $TOKEN == 'NO_TOKEN' ]; then
-          TOKEN=$DEFAULT_TOKEN
-        fi
+
         JSON='{
             "text": ":github: ${{ inputs.text }}", 
             "channel": "${{ inputs.channel }}", 
