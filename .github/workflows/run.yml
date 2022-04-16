@@ -38,7 +38,7 @@ jobs:
           fi
           RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
           --header 'Content-Type: application/json' \
-          --header 'Authorization: Bearer $TOKEN' \
+          --header "Authorization: Bearer $TOKEN" \
           --data-raw '{
               "text": ":github: ${{ inputs.text }}", 
               "channel": "${{ inputs.channel }}", 
