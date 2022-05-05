@@ -34,7 +34,7 @@ runs:
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
         
-        TEXT=$( echo ${{ inputs.text }} | sed -E 's/([^\]|^)"/\1\\"/g' )
+        TEXT=$( sed -E 's/([^\]|^)"/\1\\"/g' <<< ${{ inputs.text }} )
         
         echo "TEXT is:"
         echo $TEXT
