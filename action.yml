@@ -33,9 +33,14 @@ runs:
         TOKEN: ${{ inputs.token }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
-
+        
+        TEXT=$( echo ${{ inputs.text }} | sed -E 's/([^\]|^)"/\1\\"/g' )
+        
+        echo "TEXT is:"
+        echo $TEXT
+        
         JSON='{
-            "text": ":github: ${{ inputs.text }}", 
+            "text": ":github: $TEXT", 
             "channel": "${{ inputs.channel }}", 
             "as_user": "True"
         }'
