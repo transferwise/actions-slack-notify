@@ -39,7 +39,7 @@ runs:
         echo $TEXT
         
         JSON='{
-            "text": ":github: $TEXT", 
+            "text": ":github: ${{ input.text }}", 
             "channel": "${{ inputs.channel }}", 
             "as_user": "True"
         }'
