@@ -31,7 +31,7 @@ runs:
       shell: bash
       env:
         TOKEN: ${{ inputs.token }}
-        TEXT:  ${{ inputs.text }}
+        TEXT:  ${{ toJson(inputs.text) }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
         
@@ -39,7 +39,7 @@ runs:
         echo $TEXT
         
         JSON='{
-            "text": ":github: ${{ toJson(inputs.text) }}", 
+            "text": ":github: ${{ inputs.text }}", 
             "channel": "${{ inputs.channel }}", 
             "as_user": "True"
         }'
