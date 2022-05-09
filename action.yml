@@ -31,7 +31,7 @@ runs:
       shell: bash
       env:
         TOKEN: ${{ inputs.token }}
-        TEXT:  ${{ toJson(inputs.text) }}
+        TEXT:  ${{ inputs.text }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
         
