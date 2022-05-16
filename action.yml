@@ -22,11 +22,11 @@ outputs:
 
 runs:
   using: "composite"
-  steps: 
+  steps:
     - id: install
       shell: bash
-      run: sudo apt-get install -y jq 
-      
+      run: sudo apt-get install -y jq
+
     - id: notify
       shell: bash
       env:
@@ -34,13 +34,13 @@ runs:
         TEXT:  ${{ inputs.text }}
       run: |
         echo "Notifying ${{ inputs.channel }} via Slack..."
-        
+
         echo "TEXT is:"
         echo $TEXT
-        
+
         JSON='{
-            "text": ":github: ${{ inputs.text }}", 
-            "channel": "${{ inputs.channel }}", 
+            "text": ":github: ${{ inputs.text }}",
+            "channel": "${{ inputs.channel }}",
             "as_user": "True"
         }'
         RESULT=$( curl --location --request POST 'https://slack.com/api/chat.postMessage' \
@@ -48,7 +48,7 @@ runs:
         --header "Authorization: Bearer $TOKEN" \
         --data-raw "${JSON}" )
         SUCCESS=$( echo $RESULT | jq -r '.ok' )
-        
+
         echo "::set-output name=success::$(echo $SUCCESS)"
 
         if [ $SUCCESS != 'true' ]; then
@@ -56,5 +56,5 @@ runs:
           echo $RESULT
           exit 1
         fi
-        
+
         echo "Notified successfully"
